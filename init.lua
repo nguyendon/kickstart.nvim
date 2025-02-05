@@ -150,11 +150,30 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
+-- Show line and column number of cursor position
+vim.opt.ruler = true
+
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Show partial commands in the status line
+vim.opt.showcmd = true
+
+-- Show incremental search results
+vim.opt.incsearch = true
+
+-- Show matching brackets
+vim.opt.showmatch = true
+
+-- Ensure search messages are shown
+vim.opt.shortmess = vim.o.shortmess:gsub('S', '')
+
+-- Disable swapfile and backup
+vim.opt.swapfile = false
+vim.opt.backup = false
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
