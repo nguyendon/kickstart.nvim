@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -638,8 +638,11 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {},
+        bashls = {},
+        -- bitbake_language_server = {},
+        java_language_server = {},
         gopls = {},
-        pyright = {},
+        basedpyright = {},
         rust_analyzer = {},
         cmake = {},
         docker_compose_language_service = {},
@@ -647,6 +650,10 @@ require('lazy').setup({
         -- gh_actions_ls = {},
         html = {},
         jqls = {},
+        tailwindcss = {},
+        terraformls = {},
+        vimls = {},
+        -- ltex_plus = {},
         jsonls = {},
         powershell_es = {},
         ts_ls = {},
