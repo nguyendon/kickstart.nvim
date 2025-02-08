@@ -250,7 +250,6 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'github/copilot.vim', -- Github Copilot
-  'liuchengxu/vista.vim', -- Tagbar replacement
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -612,14 +611,14 @@ require('lazy').setup({
       })
 
       -- Change diagnostic symbols in the sign column (gutter)
-      -- if vim.g.have_nerd_font then
-      --   local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
-      --   local diagnostic_signs = {}
-      --   for type, icon in pairs(signs) do
-      --     diagnostic_signs[vim.diagnostic.severity[type]] = icon
-      --   end
-      --   vim.diagnostic.config { signs = { text = diagnostic_signs } }
-      -- end
+      if vim.g.have_nerd_font then
+        local signs = { ERROR = '', WARN = '', INFO = '', HINT = '' }
+        local diagnostic_signs = {}
+        for type, icon in pairs(signs) do
+          diagnostic_signs[vim.diagnostic.severity[type]] = icon
+        end
+        vim.diagnostic.config { signs = { text = diagnostic_signs } }
+      end
 
       -- LSP servers and clients are able to communicate to each other what features they support.
       --  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -973,6 +972,22 @@ require('lazy').setup({
           require('scrollbar').show()
         end,
       })
+    end,
+  },
+  { -- Search and replace
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      require('grug-far').setup {
+        -- options, see Configuration section below
+        -- there are no required options atm
+        -- engine = 'ripgrep' is default, but 'astgrep' can be specified
+      }
+    end,
+  },
+  { -- Tagbar replacement
+    'liuchengxu/vista.vim',
+    config = function()
+      vim.keymap.set('n', '<leader>tv', '<cmd>Vista!!<CR>', { desc = '[T]oggle [V]ista (tagbar replacement)' })
     end,
   },
 
