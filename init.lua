@@ -931,6 +931,17 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
+      -- Move any selection in any direction
+      require('mini.move').setup()
+
+      -- Split/join lines
+      require('mini.splitjoin').setup()
+
+      -- Go forward/backward with square brackets
+      require('mini.bracketed').setup {
+        comment = { suffix = 'z', options = {} },
+      }
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
