@@ -213,6 +213,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set('n', '<Tab-Up>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 -- vim.keymap.set('n', '<Tab-Right>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- CSV View Toggle
+vim.keymap.set('n', '<leader>tc', '<cmd>CsvViewToggle<CR>', { desc = '[T]oggle [C]svView' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -1585,22 +1588,22 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
-  { -- Scrollbar
-    'Xuyuanp/scrollbar.nvim',
-    -- no setup required
-    init = function()
-      local group_id = vim.api.nvim_create_augroup('scrollbar_init', { clear = true })
-
-      vim.api.nvim_create_autocmd({ 'BufEnter', 'WinScrolled', 'WinResized' }, {
-        group = group_id,
-        desc = 'Show or refresh scrollbar',
-        pattern = { '*' },
-        callback = function()
-          require('scrollbar').show()
-        end,
-      })
-    end,
-  },
+  -- { -- Scrollbar
+  --   'Xuyuanp/scrollbar.nvim',
+  --   -- no setup required
+  --   init = function()
+  --     local group_id = vim.api.nvim_create_augroup('scrollbar_init', { clear = true })
+  --
+  --     vim.api.nvim_create_autocmd({ 'BufEnter', 'WinScrolled', 'WinResized' }, {
+  --       group = group_id,
+  --       desc = 'Show or refresh scrollbar',
+  --       pattern = { '*' },
+  --       callback = function()
+  --         require('scrollbar').show()
+  --       end,
+  --     })
+  --   end,
+  -- },
   { -- Search and replace
     'MagicDuck/grug-far.nvim',
     config = function()
@@ -1616,6 +1619,28 @@ require('lazy').setup({
     config = function()
       vim.keymap.set('n', '<leader>tv', '<cmd>Vista!!<CR>', { desc = '[T]oggle [V]ista (tagbar replacement)' })
     end,
+  },
+  {
+    'hat0uma/csvview.nvim',
+    ---@module "csvview"
+    ---@type CsvView.Options
+    opts = {
+      parser = { comments = { '#', '//' } },
+      keymaps = {
+        -- Text objects for selecting fields
+        textobject_field_inner = { 'if', mode = { 'o', 'x' } },
+        textobject_field_outer = { 'af', mode = { 'o', 'x' } },
+        -- Excel-like navigation:
+        -- Use <Tab> and <S-Tab> to move horizontally between fields.
+        -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
+        -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
+        jump_next_field_end = { '<Tab>', mode = { 'n', 'v' } },
+        jump_prev_field_end = { '<S-Tab>', mode = { 'n', 'v' } },
+        jump_next_row = { '<Enter>', mode = { 'n', 'v' } },
+        jump_prev_row = { '<S-Enter>', mode = { 'n', 'v' } },
+      },
+    },
+    cmd = { 'CsvViewEnable', 'CsvViewDisable', 'CsvViewToggle' },
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
