@@ -242,6 +242,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+if vim.g.vscode then
+  print 'In VSCode, running VS Code specific setup'
+  return
+else
+  print 'In Neovim, running Neovim specific setup'
+end
+
 -- [[ Configure and install plugins ]]
 --
 --  To check the current status of your plugins, run
@@ -1559,6 +1566,18 @@ require('lazy').setup({
         comment = { suffix = 'z', options = {} },
       }
 
+      -- Session management
+      require('mini.sessions').setup {
+        -- Whether to read default session if Neovim opened without file arguments
+        autoread = true,
+
+        -- Whether to write currently read session before quitting Neovim
+        autowrite = true,
+
+        -- Whether to print session path after action
+        verbose = { read = true, write = true, delete = true },
+      }
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
@@ -1620,7 +1639,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>tv', '<cmd>Vista!!<CR>', { desc = '[T]oggle [V]ista (tagbar replacement)' })
     end,
   },
-  {
+  { -- CSV viewer
     'hat0uma/csvview.nvim',
     ---@module "csvview"
     ---@type CsvView.Options
@@ -1641,6 +1660,13 @@ require('lazy').setup({
       },
     },
     cmd = { 'CsvViewEnable', 'CsvViewDisable', 'CsvViewToggle' },
+  },
+  { -- Adds subtle animations to various operations
+    'rachartier/tiny-glimmer.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- your configuration
+    },
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
