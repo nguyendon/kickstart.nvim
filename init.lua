@@ -1578,6 +1578,9 @@ require('lazy').setup({
         verbose = { read = true, write = true, delete = true },
       }
 
+      -- Visit tracking
+      require('mini.visits').setup()
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
