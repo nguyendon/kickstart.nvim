@@ -440,6 +440,13 @@ require('lazy').setup({
         end,
         desc = 'File Explorer',
       },
+      {
+        '<leader>o',
+        function()
+          Snacks.explorer.reveal()
+        end,
+        desc = 'Reveal File',
+      },
       -- find
       {
         '<leader>fb',
