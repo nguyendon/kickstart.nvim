@@ -1581,9 +1581,13 @@ require('lazy').setup({
         -- Whether to write currently read session before quitting Neovim
         autowrite = true,
 
+        -- File for local session (use `''` to disable)
+        file = 'Session.vim',
+
         -- Whether to print session path after action
         verbose = { read = true, write = true, delete = true },
       }
+      vim.keymap.set('n', '<leader>Ns', '<cmd>lua MiniSessions.write("Session.vim")<CR>', { desc = '[N]ew [s]session' })
 
       -- Visit tracking
       require('mini.visits').setup()
