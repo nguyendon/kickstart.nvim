@@ -1573,6 +1573,9 @@ require('lazy').setup({
         comment = { suffix = 'z', options = {} },
       }
 
+      -- Whitespace management
+      require('mini.trailspace').setup()
+
       -- Session management
       require('mini.sessions').setup {
         -- Whether to read default session if Neovim opened without file arguments
@@ -1681,6 +1684,10 @@ require('lazy').setup({
     opts = {
       -- your configuration
     },
+  },
+  { -- Terraform support
+    'hashivim/vim-terraform',
+    ft = { 'terraform', 'tf', 'tfvars' },
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
