@@ -378,6 +378,8 @@ require('lazy').setup({
       bigfile = { enabled = true },
       dashboard = { enabled = true },
       explorer = { enabled = true },
+      git = { enabled = true },
+      gitbrowse = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
       notifier = {
