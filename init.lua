@@ -1576,6 +1576,9 @@ require('lazy').setup({
       -- Whitespace management
       require('mini.trailspace').setup()
 
+      -- Filesystem management
+      require('mini.files').setup()
+
       -- Session management
       require('mini.sessions').setup {
         -- Whether to read default session if Neovim opened without file arguments
@@ -1688,6 +1691,19 @@ require('lazy').setup({
   { -- Terraform support
     'hashivim/vim-terraform',
     ft = { 'terraform', 'tf', 'tfvars' },
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- optional, for icons
+    lazy = false,
+    config = function()
+      require('oil').setup {
+        view_options = {
+          show_hidden = true,
+        },
+      }
+    end,
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
